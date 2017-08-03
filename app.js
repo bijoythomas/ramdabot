@@ -29,14 +29,14 @@ let server = http.createServer(function (req, res) {
       //console.log(JSON.parse(jsonString));
       res.setHeader('Content-Type', 'application/json');
       res.setHeader('Cache-Control', 'no-cache, no-store');
-      res.end(util.inspect({
+      res.end(JSON.stringify({
         "color": "green",
-        "message": "/code " + JSON.parse(jsonString),//It's going to be sunny tomorrow! (yey)",
+        "message": util.inspect(JSON.parse(jsonString)),//It's going to be sunny tomorrow! (yey)",
         "notify": false,
         "message_format": "text"
       }));
-    });	
-    	  
+    });
+
   } else if (url == '/info/gen' || url == '/info/poll') {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Cache-Control', 'no-cache, no-store');
