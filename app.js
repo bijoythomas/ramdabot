@@ -3,6 +3,7 @@ http = require('http'),
 util = require('util'),
 fs = require('fs'),
 path = require('path'),
+safeEval = require('safe-eval'),
 contentTypes = require('./utils/content-types'),
 sysInfo = require('./utils/sys-info'),
 env = process.env
@@ -38,14 +39,16 @@ let server = http.createServer(function (req, res) {
         let code = typedmsg.split('/ramda')[1]
         try {
           with(R) {
+            let result = safeEval(code, R.mergeAll([R, moment, {R, moment}]))
             res.end(JSON.stringify({
               'color': 'green',
-              'message': util.inspect(eval(code)),
+              'message': util.inspect(result),
               'notify': false,
               'message_format': 'text'
             }))
           }
         } catch (err) {
+          console.error(err)
           res.end(JSON.stringify({
             'color': 'red',
             'message': 'Check your functional fu my friend',

@@ -12,6 +12,7 @@
   "dependencies": {
     "ramda": "~0.24.1",
     "ramda-fantasy": "~0.7.0",
-    "moment": "~2.12.0"
+    "moment": "~2.12.0",
+    "safe-eval": "0.3.0"
   }
 }
