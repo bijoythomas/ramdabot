@@ -1,4 +1,5 @@
 const http         = require('http'),
+      util = require('util'),
       fs           = require('fs'),
       path         = require('path'),
       contentTypes = require('./utils/content-types'),
@@ -25,10 +26,10 @@ let server = http.createServer(function (req, res) {
     });
 
     req.on('end', function () {
-      console.log(JSON.parse(jsonString));
+      //console.log(JSON.parse(jsonString));
       res.setHeader('Content-Type', 'application/json');
       res.setHeader('Cache-Control', 'no-cache, no-store');
-      res.end(JSON.stringify({
+      res.end(util.inspect({
         "color": "green",
         "message": "/code " + JSON.parse(jsonString),//It's going to be sunny tomorrow! (yey)",
         "notify": false,
