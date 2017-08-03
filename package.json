@@ -8,5 +8,9 @@
     "start": "node --use_strict start.js"
   },
   "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "ramda": "~0.24.1",
+    "ramda-fantasy": "~0.7.0"
+  }
 }
