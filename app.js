@@ -30,7 +30,7 @@ let server = http.createServer(function (req, res) {
       res.setHeader('Cache-Control', 'no-cache, no-store');
       res.end(JSON.stringify({
         "color": "green",
-        "message": "It's going to be sunny tomorrow! (yey)",
+        "message": "/code " + JSON.parse(jsonString),//It's going to be sunny tomorrow! (yey)",
         "notify": false,
         "message_format": "text"
       }));
