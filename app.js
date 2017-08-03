@@ -39,7 +39,7 @@ let server = http.createServer(function (req, res) {
         let code = typedmsg.split('/ramda')[1]
         try {
           with(R) {
-            let result = safeEval(code, R.mergeAll([R, moment, {R, moment}]))
+            let result = safeEval(code, R.mergeAll([R, moment, {R, moment}]), {timeout: 5000})
             res.end(JSON.stringify({
               'color': 'green',
               'message': util.inspect(result),
