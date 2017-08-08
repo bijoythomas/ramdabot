@@ -8,7 +8,8 @@ contentTypes = require('./utils/content-types'),
 sysInfo = require('./utils/sys-info'),
 env = process.env
 R = require('ramda'),
-moment = require('moment')
+moment = require('moment'),
+RF = require('ramda-fantasy')
 
 let server = http.createServer(function (req, res) {
   let url = req.url
@@ -38,14 +39,16 @@ let server = http.createServer(function (req, res) {
         let typedmsg = postJson.item.message.message
         let code = typedmsg.split('/ramda')[1]
         try {
-          with(R) {
-            let result = safeEval(code, R.mergeAll([R, {R, moment}]), {timeout: 5000})
-            res.end(JSON.stringify({
-              'color': 'green',
-              'message': util.inspect(result),
-              'notify': false,
-              'message_format': 'text'
-            }))
+          with(RF) {
+            with(R) {
+              let result = safeEval(code, R.mergeAll([R, RF, {R, moment}]), {timeout: 5000})
+              res.end(JSON.stringify({
+                'color': 'green',
+                'message': util.inspect(result),
+                'notify': false,
+                'message_format': 'text'
+              }))
+            }
           }
         } catch (err) {
           console.error(err)
