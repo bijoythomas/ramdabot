@@ -1,6 +1,7 @@
 const
 http = require('http'),
 util = require('util'),
+vm = require('vm'),
 fs = require('fs'),
 path = require('path'),
 safeEval = require('safe-eval'),
@@ -41,7 +42,7 @@ let server = http.createServer(function (req, res) {
         try {
           with(RF) {
             with(R) {
-              let result = safeEval(code, R.mergeAll([R, RF, {R, moment}]), {timeout: 5000})
+              let result = vm.runInNewContext(code, R.mergeAll([R, RF, {R, moment}]), {timeout: 5000})
               res.end(JSON.stringify({
                 'color': 'green',
                 'message': util.inspect(result),
