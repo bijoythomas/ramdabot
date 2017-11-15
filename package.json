@@ -1,17 +1,17 @@
 {
-  "name": "openshift-cartridge-nodejs-template",
+  "name": "whatumaycallit",
   "version": "1.0.1",
-  "description": "Custom Node.js cartridge for OpenShift - sample application",
   "private": true,
   "main": "start.js",
   "scripts": {
     "start": "node start.js",
     "zip": "zip -r function.zip package.json index.js node_modules"
   },
-  "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",
+  "author": "Bijoy Thomas <bijoyjth@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "ramda": "~0.24.1",
+    "lodash": "~4.6.1",
     "ramda-fantasy": "~0.8.0",
     "moment": "~2.12.0",
     "safe-eval": "0.3.0"

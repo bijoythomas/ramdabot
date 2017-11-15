@@ -7,6 +7,7 @@ fs = require('fs'),
 path = require('path'),
 safeEval = require('safe-eval'),
 R = require('ramda'),
+_ = require('lodash'),
 moment = require('moment'),
 RF = require('ramda-fantasy')
 
@@ -14,7 +15,7 @@ exports.handler = (event, context, callback) => {
 
   try {
     let code = event['body-json'].item.message.message.split('/ramda')[1]
-    let result = vm.runInNewContext(code, R.mergeAll([R, RF, {R, moment}]), {timeout: 5000})
+    let result = vm.runInNewContext(code, R.mergeAll([R, RF, {R, moment, _}]), {timeout: 5000})
     callback(null, {
         'color': 'green',
         'message': util.inspect(result),
