@@ -16,21 +16,21 @@ const S = create({checkTypes: process.env.NODE_ENV !== 'production', env})
 exports.handler = (event, context, callback) => {
 
   try {
-    let code = event['body-json'].item.message.message.split('/ramda')[1]
+    if (event.channel_name !== 'jsbot') {
+      callback(null, 'Run me in the #jsbot channel')
+      return
+    }
+    let code = event.text
     let result = vm.runInNewContext(code, R.mergeAll([R, RF, {R, moment, _, S}]), {timeout: 5000})
     callback(null, {
-        'color': 'green',
-        'message': util.inspect(result),
-        'notify': false,
-        'message_format': 'text'
+      "response_type": "in_channel",
+      "text": util.inspect(result)
     })
   } catch (err) {
     console.error(err)
     callback(null, {
-        'color': 'red',
-        'message': 'Check your functional fu my friend' + '\n' + err,
-        'notify': false,
-        'message_format': 'text'
+      "response_type": "in_channel",
+      "text": "Check your JS foo my friend"
     })
   }
 };
